@@ -1,9 +1,19 @@
-import { FaUser } from "react-icons/fa";
+import { useState } from "react";
+// ICONES
+import {  FaEdit, FaUser } from "react-icons/fa";
 import { HiBars4 } from "react-icons/hi2";
-import { FaUserGraduate } from "react-icons/fa6";
-import Navbar from "../Navbar";
+import { CgRemove } from "react-icons/cg";
 
+// COMPONENT
+import Navbar from "../Navbar";
+import Edit from "./CRUD_component/Edit.component";
+
+//FUNCTION
 function Eleves() {
+  const [modify, setModify] = useState(false)
+  const HandleEditUser =()=>{
+    setModify(!modify);
+  }
   return (
     <div className="flex justify-center items-center w-screen">
       <div className="w-full">
@@ -70,15 +80,20 @@ function Eleves() {
         {/* Tableau des derniers inscrits */}
         <div className="my-10 w-full px-4 overflow-x-auto">
           <div className="w-full flex justify-center items-center mb-4">
+
             <div className="p-4 rounded-lg bg-purple-500 shadow-md w-full max-w-5xl">
               <div className="flex items-center text-white">
                 <p className="font-bold">Info :</p>
-                <div className="flex items-center mx-4 bg-[rgba(255,255,255,0.1)] p-1 rounded">
-                  <FaUserGraduate />
-                  <span className="ml-2">10 DERNIERS INSCRITS</span>
-                </div>
+                
+                <select name="info" id="" className="flex items-center mx-4 bg-[rgba(255,255,255,0.1)] p-1 rounded">
+                  <option value="" className="bg-purple-500">10 dernier inscrits</option>
+                  <option value="" className="bg-purple-500">Tous</option>
+                  <option value="" className="bg-purple-500">Garcons uniquement</option>
+                </select>
+
               </div>
             </div>
+
           </div>
           <div className="flex justify-center items-center">
 
@@ -98,21 +113,32 @@ function Eleves() {
                 <th className="p-2">Action</th>
               </tr>
             </thead>
+
             <tbody>
               <tr className="border-t">
                 <td className="p-2 text-center">#</td>
-                <td className="p-2 text-center">Nom</td>
-                <td className="p-2 text-center">Prénom</td>
-                <td className="p-2 text-center">Classe</td>
-                <td className="p-2 text-center">Cout annuel</td>
-                <td className="p-2 text-center">Ville naissance</td>
-                <td className="p-2 text-center">Tel</td>
-                <td className="p-2 text-center">Sexe</td>
-                <td className="p-2 text-center">Action</td>
+                <td className="p-2 text-center">Badoda</td>
+                <td className="p-2 text-center">Be Tarehy</td>
+                <td className="p-2 text-center">5eme 2</td>
+                <td className="p-2 text-center">25.000.000</td>
+                <td className="p-2 text-center">Antananarivo</td>
+                <td className="p-2 text-center">0343241106</td>
+                <td className="p-2 text-center">Bi-sexe</td>
+                <td className="p-2 mx-5 text-center">
+                  <tr>
+                    <td className="text-blue-600 text-xl mx-5">
+                      <FaEdit onClick={HandleEditUser} className="cursor-pointer transition hover:scale-[1.2]"></FaEdit>
+                    </td>
+                    <td className="text-red-600 text-xl"><CgRemove/></td>
+                  </tr>
+                </td>
               </tr>
             </tbody>
+
           </table>
           </div>
+
+         {modify && <Edit/>} 
         </div>
       </div>
     </div>
