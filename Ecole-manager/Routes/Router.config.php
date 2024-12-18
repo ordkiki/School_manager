@@ -31,10 +31,10 @@ $routes = [
 
     // Routes pour ElevesController
     'GET /eleves' => ['ElevesController', 'Get_User'],
-    // 'GET /elevs' => ['ElevesController', 'Get_User'],
-    'POST /eleves' => ['ElevesController', 'Create'],
-    'PUT /eleves/{id}' => ['ElevesController', 'Put'],
-    'DELETE /eleves/{id}' => ['ElevesController', 'Delete_user'],
+    // 'GET /eleves' => ['ElevesController', 'Get_User'],
+    'POST /eleves/Add' => ['ElevesController', 'Create'],
+    'PUT /eleves/Edit/{Matricule}' => ['ElevesController', 'Put'],
+    'DELETE /eleves/Remove/{id}' => ['ElevesController', 'Delete_user'],
 ];
 
     try {

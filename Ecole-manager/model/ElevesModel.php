@@ -5,7 +5,7 @@ class ElevesModel
     private $Nom;
     private $Prenom;
     private $Classe;
-    private $Ecolage_annuel;
+    private $Ecole_annuel;
     private $Ville_naiss;
     private $Tel;
     private $Sexe;
@@ -31,6 +31,22 @@ class ElevesModel
         return $this->Prenom;
     }
 
+    public function GetClasse()
+    {
+        return $this->Classe;
+    }
+    public function GetEcole_annuel()
+    {
+        return $this->Ecole_annuel;
+    }
+    public function GetVille_naiss()
+    {
+        return $this->Ville_naiss;
+    }
+    public function GetSexe()
+    {
+        return $this->Sexe;
+    }
     public function GetTel()
     {
         return $this->Tel;
@@ -38,13 +54,13 @@ class ElevesModel
 
     public function Inscire_Eleve($data)
     {
-        $sql = "INSERT INTO Eleves (Nom, Prenom, Classe,Ecolage_annuel, Ville_naiss,  Tel, Sexe)
-                    VALUES (:Nom, :Prenom, :Classe, :Ecolage_annuel, :Ville_naiss,  :Tel, :Sexe)";
+        $sql = "INSERT INTO Eleves (Nom, Prenom, Classe,Ecole_annuel, Ville_naiss,  Tel, Sexe)
+                    VALUES (:Nom, :Prenom, :Classe, :Ecole_annuel, :Ville_naiss,  :Tel, :Sexe)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':Nom', $data['Nom']);
         $stmt->bindParam(':Prenom', $data['Prenom']);
         $stmt->bindParam(':Classe', $data['Classe']);
-        $stmt->bindParam(':Ecolage_annuel', $data['Ecolage_annuel']);
+        $stmt->bindParam(':Ecole_annuel', $data['Ecole_annuel']);
         $stmt->bindParam(':Ville_naiss', $data['Ville_naiss']);
         $stmt->bindParam(':Tel', $data['Tel']);
         $stmt->bindParam(':Sexe', $data['Ville_naiss']);
@@ -65,23 +81,23 @@ class ElevesModel
         return false;
     }
 
-    public function Remove_User_ById($matricule)
+    public function RemoveByMatricule($matricule)
     {
         $sql = "DELETE FROM Eleves WHERE Matricule = :Matricule";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $matricule, PDO::PARAM_INT);
         return $stmt->execute();
     }
-    public function Modify_userById($data, $matricule)
+    public function Modify_ByMatricule($data, $matricule)
     {
         $sql = "UPDATE Users
-            SET Nom = :Nom, Prenom = :Prenom, Classe = :Classe,Ecolage_annuel = :Ecolage_annuel, Ville_naiss = :Ville_naiss,  Tel = :Tel, Sexe = :Sexe
+            SET Nom = :Nom, Prenom = :Prenom, Classe = :Classe,Ecole_annuel = :Ecole_annuel, Ville_naiss = :Ville_naiss,  Tel = :Tel, Sexe = :Sexe
             WHERE Id_user = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':Nom', $data['Nom']);
         $stmt->bindParam(':Prenom', $data['Prenom']);
         $stmt->bindParam(':Classe', $data['Classe']);
-        $stmt->bindParam(':Ecolage_annuel', $data['Ecolage_annuel']);
+        $stmt->bindParam(':Ecole_annuel', $data['Ecole_annuel']);
         $stmt->bindParam(':Ville_naiss', $data['Ville_naiss']);
         $stmt->bindParam(':Tel', $data['Tel']);
         $stmt->bindParam(':Sexe', $data['Ville_naiss']);

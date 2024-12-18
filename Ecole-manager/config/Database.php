@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 namespace Config;
 
@@ -9,6 +11,12 @@ class Database
     private $username = "root";
     private $password = "";
     public $conn;
+
+    
+    public function CreatTable()
+    {
+
+    }
 
     public function GetConnection()
     {
