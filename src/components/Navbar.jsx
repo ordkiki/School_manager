@@ -7,8 +7,9 @@ import { CiSettings } from "react-icons/ci";
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [useremail, setemail] = useState([]);
+  const [logo,setLogo] = useState([]);
+ // Utilisation de charAt pour obtenir le premier caractère
 
-  const [Logo, setLogo] = useState("");
   useEffect(() => {
     const checkSession = async () => {
       try {
@@ -20,7 +21,8 @@ function Navbar() {
 
         setIsLoggedIn(true);
         setemail(response.data.email)
-
+        setLogo(response.data.email.charAt(0));
+        // logo.capitalize()
         
       } catch (error) {
         // const navigate = useNavigate();
@@ -39,7 +41,7 @@ function Navbar() {
         <div className="">
           {isLoggedIn ? (
             <div className="cursor-pointer items-center flex">
-              <div className="bg-yellow-400 rounded-full w-[2vw] h-[2vw] flex items-center justify-center">C</div>
+              <div className="bg-yellow-400 rounded-full w-[2vw] h-[2vw] flex items-center justify-center font-bold">{logo}</div>
                 <p className="mx-5 lg:w-0">{useremail}</p>
 
             </div>
@@ -49,7 +51,7 @@ function Navbar() {
         </div>
         <div className="flex items-center">
           <button className="text-[12px] p-1 mx-2 bg-blue-500 text-center px-2 rounded-lg font-semibold text-white">
-            Add student
+            LogOut
           </button>
           <button><CiSettings className="text-xl"></CiSettings></button>
         </div>

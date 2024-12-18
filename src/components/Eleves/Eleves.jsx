@@ -30,11 +30,11 @@ function Eleves() {
               <FaUser className="text-4xl" />
             </div>
             <div className="absolute top-2 right-2 text-sm">
-              <h3 className="font-bold">FILLES</h3>
+              <h3 className="font-bold text-[12px]">FILLES</h3>
               <h3>6</h3>
             </div>
             <div className="absolute bottom-2 left-2 text-xs">
-              <p>Total des élèves enregistrés</p>
+              <p>Total des filles inscrts</p>
             </div>
           </div>
 
@@ -42,11 +42,11 @@ function Eleves() {
           <div className="relative lg:w-[18vw] w-full sm:w-[45vw] md:w-[30vw] m-2 h-[20vh] bg-white rounded-lg shadow-md">
             <div className="flex justify-center items-center text-white rounded-lg absolute -top-5 left-4 w-[30%] h-[60%] bg-green-500" />
             <div className="absolute top-2 right-2 text-sm">
-              <h3 className="font-bold">GARÇONS</h3>
+              <h3 className="font-bold text-[12px]">GARÇONS</h3>
               <h3>6</h3>
             </div>
             <div className="absolute bottom-2 left-2 text-xs">
-              <p>Total des élèves enregistrés</p>
+              <p>Total des Garcons inscrits</p>
             </div>
           </div>
 
@@ -54,7 +54,7 @@ function Eleves() {
           <div className="relative lg:w-[18vw] w-full sm:w-[45vw] md:w-[30vw] m-2 h-[20vh] bg-white rounded-lg shadow-md">
             <div className="flex justify-center items-center text-white rounded-lg absolute -top-5 left-4 w-[30%] h-[60%] bg-red-500" />
             <div className="absolute top-2 right-2 text-sm">
-              <h3 className="font-bold">ÉLÈVES</h3>
+              <h3 className="font-bold text-[12px]">ÉLÈVES</h3>
               <h3>6</h3>
             </div>
             <div className="absolute bottom-2 left-2 text-xs">
@@ -68,7 +68,7 @@ function Eleves() {
               <HiBars4 className="text-4xl" />
             </div>
             <div className="absolute top-2 right-2 text-sm">
-              <h3 className="font-bold">CLASSES</h3>
+              <h3 className="font-bold text-[12px]">CLASSES</h3>
               <h3>6</h3>
             </div>
             <div className="absolute bottom-2 left-2 text-xs">
@@ -83,7 +83,7 @@ function Eleves() {
 
             <div className="p-4 rounded-lg bg-purple-500 shadow-md w-full max-w-5xl">
               <div className="flex items-center text-white">
-                <p className="font-bold">Info :</p>
+                <p className="font-bold text-[12px]">Info :</p>
                 
                 <select name="info" id="" className="flex items-center mx-4 bg-[rgba(255,255,255,0.1)] p-1 rounded">
                   <option value="" className="bg-purple-500">10 dernier inscrits</option>
@@ -95,9 +95,9 @@ function Eleves() {
             </div>
 
           </div>
-          <div className="flex justify-center items-center">
 
           
+          <div className="flex justify-center items-center">      
           {/* Tableau */}
           <table className="table-auto w-full max-w-5xl bg-white rounded-lg shadow-md text-sm">
             <thead className="bg-gray-200 text-gray-600 uppercase text-xs">

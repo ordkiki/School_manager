@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import Signin from "./components/Auth/Signin";
 import Login from "./components/Auth/Login";
 import Load from "./components/Loader/Load";
+import Adduser from "./components/Add/adduser.component";
+import Student from "./views/Student";
 
 function App() {
   const [isload, SetLoad] = useState(true)
@@ -28,6 +30,9 @@ function App() {
           <Route  exact path="/Sign" element={<Signin/>}/>
           <Route index exact path="/Login" element={<Login/>}/>
           <Route  exact path="/Dashboard" element={<Dashboard/>}/>
+          <Route  exact path="/eleves" element={<Student/>}/>
+          {/* <Route  exact path="/add/users" element={<Dashboard/>}/> */}
+          <Route  exact path="/add/users" element={<Adduser/>}/>
           <Route  exact path="/" element={<Login/>}/>
         </Routes>
       </BrowserRouter>
