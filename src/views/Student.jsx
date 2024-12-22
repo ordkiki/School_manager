@@ -12,6 +12,7 @@ function Student() {
   const [is_open, setIs_Open] = useState(false);
   const [searchItem, SetSearch] = useState([]);
   const [studentData, SetstudentData] = useState([]);
+  const [load, SetLoad] = useState(false);
 
   const handleClick = () => {
     setIs_Open(!is_open);
@@ -32,6 +33,7 @@ function Student() {
           headers: { "Content-Type": "application/json" },
         }
       );
+      console.log("response :", response.data);
       console.log("Students :", response.data);
     } catch (error) {
       alert(error.message);
@@ -48,15 +50,24 @@ function Student() {
             headers: { "Content-Type": "application/json" },
           }
         );
-        console.log("Data fetched successfully:", response.data);
-        SetstudentData(response.data);
+
+        // SetstudentData(response.data);
+        console.log("response :", response.data);
+        SetstudentData(response.data)
+        console.log("Student :",studentData);
+        
       } catch (error) {
         console.error("Error fetching data:", error);
         alert(error.message);
       }
+      finally{
+        SetLoad(true);
+      }
+
     };
     FetchStudent();
   }, []);
+//   console.log(studentData);
   
 
   return (
@@ -138,14 +149,14 @@ function Student() {
                 {studentData.length > 0 ? (
                   studentData.map((student, index) => (
                     <tr key={index} className="border-t">
-                      <td className="p-2 text-center">{student.matricule}</td>
-                      <td className="p-2 text-center">{student.nom}</td>
-                      <td className="p-2 text-center">{student.prenom}</td>
-                      <td className="p-2 text-center">{student.classe}</td>
-                      <td className="p-2 text-center">{student.cout_annuel}</td>
-                      <td className="p-2 text-center">{student.ville_naissance}</td>
-                      <td className="p-2 text-center">{student.tel}</td>
-                      <td className="p-2 text-center">{student.sexe}</td>
+                      <td className="p-2 text-center">{student.Matricule}</td>
+                      <td className="p-2 text-center">{student.Nom}</td>
+                      <td className="p-2 text-center">{student.Prenom}</td>
+                      <td className="p-2 text-center">{student.Classe}</td>
+                      <td className="p-2 text-center">{student.Ecole_annuel}</td>
+                      <td className="p-2 text-center">{student.Ville_naiss}</td>
+                      <td className="p-2 text-center">{student.Tel}</td>
+                      <td className="p-2 text-center">{student.Sexe}</td>
                       <td className="p-2 text-center">
                         <div className="flex justify-center gap-2">
                           <FaEdit className="text-blue-600 text-xl cursor-pointer transition hover:scale-110" />
