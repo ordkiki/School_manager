@@ -1,6 +1,5 @@
 <?php
 
-
 function matchRoute($url, $route)
 {
     $pattern = "@^" . preg_replace('/\{[\w]+\}/', '([\w-]+)', $route) . "$@";
