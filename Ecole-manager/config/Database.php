@@ -53,7 +53,7 @@ class Database {
             // Exécution des requêtes pour chaque table
             foreach ($tables as $name => $sql) {
                 $this->conn->exec($sql);
-                echo "Table '{$name}' créée ou déjà existante.\n";
+                // echo "Table '{$name}' créée ou déjà existante.\n";
             }
         } catch (\PDOException $e) {
             die("Erreur lors de la création des tables : " . $e->getMessage());

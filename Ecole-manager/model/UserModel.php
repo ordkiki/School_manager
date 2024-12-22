@@ -1,7 +1,7 @@
 <?php
 class UserModel
 {
-    private $Id_user;
+    private $id;
     private $Nom;
     private $Mdp;
     private $Email;
@@ -19,7 +19,7 @@ class UserModel
 
     public function GetID()
     {
-        return $this->Id_user;
+        return $this->id;
     }
 
     public function GetEmail()
@@ -34,7 +34,7 @@ class UserModel
 
     public function Sign_User($data)
     {
-        $sql = "INSERT INTO user (Nom, Mdp, Email)
+        $sql = "INSERT INTO users (Nom, Mdp, Email)
                     VALUES (:Nom , :Mdp, :Email)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':Nom', $data['Nom']);
@@ -48,7 +48,7 @@ class UserModel
     }
     public function ShowUser()
     {
-        $sql = "SELECT * FROM user";
+        $sql = "SELECT * FROM users";
         $stmt = $this->conn->query($sql);
         if ($stmt->execute()) {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -58,7 +58,7 @@ class UserModel
     
     public function ShowUserByEmail($Email)
     {
-        $sql = "SELECT * FROM user WHERE Email = :Email";
+        $sql = "SELECT * FROM users WHERE Email = :Email";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':Email', $Email, PDO::PARAM_STR);
         if ($stmt->execute()) {
@@ -69,7 +69,7 @@ class UserModel
 
     public function ShowUserId($id)
     {
-        $sql = "SELECT * FROM user WHERE Id_user = :id";
+        $sql = "SELECT * FROM users WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         if ($stmt->execute()) {
@@ -80,14 +80,14 @@ class UserModel
     
     public function Delete_user($id)
     {
-        $sql = "DELETE FROM Users WHERE Id_user = :id";
+        $sql = "DELETE FROM users WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
     public function Edit_user($data, $id)
     {
-        $sql = "UPDATE user SET Nom = :Nom, Mdp = :Mdp, Email = :Email WHERE Id_user = :id";
+        $sql = "UPDATE users SET Nom = :Nom, Mdp = :Mdp, Email = :Email WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':Nom', $data['Nom']);
         $stmt->bindParam(':Mdp', $data['Mdp']);
