@@ -13,9 +13,9 @@ function Student() {
   const [is_open, setIs_Open] = useState(false);
   const [searchItem, SetSearch] = useState([]);
   const [studentData, SetstudentData] = useState([]);
-  const [load, SetLoad] = useState(false);
+  const [useMatricule, SetMatricule] = useState(null);
   const [isEdit, SetEdit] = useState(false);
-
+  const [load, setLoading] = useState(false)
   const handleClick = () => {
     setIs_Open(!is_open);
   };
@@ -25,10 +25,24 @@ function Student() {
     SetSearch({ ...searchItem, [name]: value });
   };
 
-  const EditbyMatricule = () => {
-    SetEdit(!isEdit)
-    console.log(!isEdit);
-    
+  const EditbyMatricule = (matricule) => {
+    SetEdit(true);
+    SetMatricule(matricule); // Passe la matricule directement ici
+  };
+
+  const RemoveStudent = async (matricule) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost/API/Ecole-manager/Students/Remove/${matricule}`,
+        studentData,
+        { headers: { "Content-Type": "application/json" } }
+      );
+      alert(`Suppression Ok : ${response.data.Prenom}`);
+    } catch (error) {
+      console.error("Echec de la suppression ,verfifier la status :", error.response?.data || error.message);
+      alert(error.message);
+    }
+
   }
 
   const handleSearch = async (e) => {
@@ -42,7 +56,7 @@ function Student() {
         }
       );
       console.log(response.status);
-      
+
     } catch (error) {
       alert(error.message);
     }
@@ -50,26 +64,22 @@ function Student() {
 
   useEffect(() => {
     const FetchStudent = async () => {
+      setLoading(true);
       try {
-        console.log("Fetching data...");
         const response = await axios.get(
           "http://localhost/API/Ecole-manager/eleves",
-          {
-            headers: { "Content-Type": "application/json" },
-          }
+          { headers: { "Content-Type": "application/json" } }
         );
-        SetstudentData(response.data)        
+        SetstudentData(response.data);
       } catch (error) {
-        console.error("Error fetching data:", error);
-        alert(error.message);
+        console.error("Erreur lors de la récupération :", error);
+      } finally {
+        setLoading(false); // Indique que le chargement est terminé
       }
-      finally{
-        SetLoad(true);
-      }
-
     };
     FetchStudent();
   }, []);
+
 
   return (
     <div className="flex flex-col lg:flex-row">
@@ -117,7 +127,7 @@ function Student() {
               </div>
             )}
 
-           
+
             <div className="flex items-center gap-2">
               <label htmlFor="filter">Filtrer par :</label>
               <select
@@ -162,12 +172,17 @@ function Student() {
                       <td className="p-2 text-center">
                         <div className="flex justify-center gap-2">
                           <button
-                            onClick={EditbyMatricule}
+                            onClick={() => EditbyMatricule(student.Matricule)}
                           >
                             <FaEdit className="text-blue-600 text-xl cursor-pointer transition hover:scale-110" />
 
                           </button>
-                          <CgRemove className="text-red-600 text-xl cursor-pointer transition hover:scale-110" />
+                          <button
+                            onClick={() => RemoveStudent(student.Matricule)}
+                          >
+                            <CgRemove className="text-red-600 text-xl cursor-pointer transition hover:scale-110" />
+
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -184,14 +199,14 @@ function Student() {
           </div>
         </div>
       </div>
-    
-      {
-              isEdit && (
-                <Edit/>
 
-              )
-              
-            }
+      {
+        isEdit && (
+          <Edit matricule={useMatricule} />
+
+        )
+
+      }
 
     </div>
 

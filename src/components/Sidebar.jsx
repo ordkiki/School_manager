@@ -48,7 +48,7 @@ function Sidebar() {
             <span className='hover:text-white text-gray-500 p-2'>Tableau de Bord</span>
           </Link>
           <Link
-            to="/eleve"
+            to="/eleves"
             className="flex items-center space-x-3 hover:text-white text-gray-500   hover:bg-purple-700 rounded-lg transition"
           >
             <FaUserGraduate className="text-xl" />

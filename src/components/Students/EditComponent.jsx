@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 
-function Edit() {
+function Edit({ matricule })  {
     const { Matricule } = useParams(); // Extraire Matricule correctement
     const [studentData, setStudentData] = useState({
         Nom: '',
@@ -14,6 +14,8 @@ function Edit() {
         Tel: '',
         Sexe: 'masculin'
     });
+    // console.log(Matricule);
+    
     const [loading, setLoading] = useState(true);
 
     const handleChange = (e) => {
@@ -25,7 +27,7 @@ function Edit() {
         e.preventDefault();
         try {
             const response = await axios.put(
-                `http://localhost/API/Ecole-manager/Students/Edit?Matricule=${Matricule}`,
+                `http://localhost/API/Ecole-manager/Students/Edit/${matricule}`,
                 studentData,
                 { headers: { "Content-Type": "application/json" } }
             );
@@ -37,28 +39,23 @@ function Edit() {
     };
     
     useEffect(() => {
-        const fetchStudent = async () => {
+        // Charger les données de l'étudiant
+        const fetchStudentData = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost/API/Ecole-manager/Students/${Matricule}`
+                    `http://localhost/API/Ecole-manager/Students/${matricule}`
                 );
-                console.log(response.data);
-                if (response.data) {
-                    setStudentData(response.data);
-                    
-                } else {
-                    throw new Error("Étudiant non trouvé");
-                }
+                setStudentData(response.data);
             } catch (error) {
-                console.error("Erreur lors de l'importation des données :", error);
+                console.error("Erreur de récupération des données :", error);
             } finally {
                 setLoading(false);
             }
         };
-        fetchStudent();
-    }, [Matricule]);
+        fetchStudentData();
+    }, [matricule]); 
     console.log(studentData);
-
+    
     if (loading) return <div>Chargement...</div>;
 
     return (
