@@ -20,7 +20,7 @@ function Adduser() {
             student_data,
             { headers: { "Content-Type": "application/json" } }
             );
-            console.log("Utilisateur ajouté avec succès :", response.data);
+            alert("Utilisateur ajouté avec succès :", response.data.Prenom);
             // console.log(student_data);
 
         } catch (error) {

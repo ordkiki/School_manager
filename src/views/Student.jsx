@@ -5,14 +5,16 @@ import { FaEdit } from "react-icons/fa";
 import { CgRemove } from "react-icons/cg";
 
 import Sidebar from "../components/Sidebar";
-import Adduser from "../components/Add/adduser.component";
+import Adduser from "../components/Students/adduser.component";
 import Navbar from "../components/Navbar";
+import Edit from "../components/Students/EditComponent";
 
 function Student() {
   const [is_open, setIs_Open] = useState(false);
   const [searchItem, SetSearch] = useState([]);
   const [studentData, SetstudentData] = useState([]);
   const [load, SetLoad] = useState(false);
+  const [isEdit, SetEdit] = useState(false);
 
   const handleClick = () => {
     setIs_Open(!is_open);
@@ -23,7 +25,13 @@ function Student() {
     SetSearch({ ...searchItem, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const EditbyMatricule = () => {
+    SetEdit(!isEdit)
+    console.log(!isEdit);
+    
+  }
+
+  const handleSearch = async (e) => {
     e.preventDefault();
 
     try {
@@ -33,8 +41,8 @@ function Student() {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log("response :", response.data);
-      console.log("Students :", response.data);
+      console.log(response.status);
+      
     } catch (error) {
       alert(error.message);
     }
@@ -50,12 +58,7 @@ function Student() {
             headers: { "Content-Type": "application/json" },
           }
         );
-
-        // SetstudentData(response.data);
-        console.log("response :", response.data);
-        SetstudentData(response.data)
-        console.log("Student :",studentData);
-        
+        SetstudentData(response.data)        
       } catch (error) {
         console.error("Error fetching data:", error);
         alert(error.message);
@@ -67,8 +70,6 @@ function Student() {
     };
     FetchStudent();
   }, []);
-//   console.log(studentData);
-  
 
   return (
     <div className="flex flex-col lg:flex-row">
@@ -81,7 +82,7 @@ function Student() {
             <form
               method="POST"
               className="flex flex-wrap gap-4 items-center"
-              onSubmit={handleSubmit}
+              onSubmit={handleSearch}
             >
               <input
                 type="text"
@@ -116,6 +117,7 @@ function Student() {
               </div>
             )}
 
+           
             <div className="flex items-center gap-2">
               <label htmlFor="filter">Filtrer par :</label>
               <select
@@ -159,7 +161,12 @@ function Student() {
                       <td className="p-2 text-center">{student.Sexe}</td>
                       <td className="p-2 text-center">
                         <div className="flex justify-center gap-2">
-                          <FaEdit className="text-blue-600 text-xl cursor-pointer transition hover:scale-110" />
+                          <button
+                            onClick={EditbyMatricule}
+                          >
+                            <FaEdit className="text-blue-600 text-xl cursor-pointer transition hover:scale-110" />
+
+                          </button>
                           <CgRemove className="text-red-600 text-xl cursor-pointer transition hover:scale-110" />
                         </div>
                       </td>
@@ -177,7 +184,18 @@ function Student() {
           </div>
         </div>
       </div>
+    
+      {
+              isEdit && (
+                <Edit/>
+
+              )
+              
+            }
+
     </div>
+
+
   );
 }
 

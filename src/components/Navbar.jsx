@@ -9,7 +9,14 @@ function Navbar() {
   const [useremail, setemail] = useState([]);
   const [logo,setLogo] = useState([]);
  // Utilisation de charAt pour obtenir le premier caractère
-
+  const LogOut = () => {
+    try {
+      axios.post("http://localhost/API/Ecole-manager/users/LogOut");
+    }
+    catch (exception){
+      console.log(exception);
+    }
+  }
   useEffect(() => {
     const checkSession = async () => {
       try {
@@ -50,7 +57,9 @@ function Navbar() {
           )}
         </div>
         <div className="flex items-center">
-          <button className="text-[12px] p-1 mx-2 bg-blue-500 text-center px-2 rounded-lg font-semibold text-white">
+          <button
+            onClick={LogOut}
+            className="text-[12px] p-1 mx-2 bg-blue-500 text-center px-2 rounded-lg font-semibold text-white">
             LogOut
           </button>
           <button><CiSettings className="text-xl"></CiSettings></button>

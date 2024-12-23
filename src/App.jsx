@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Signin from "./components/Auth/Signin";
 import Login from "./components/Auth/Login";
 import Load from "./components/Loader/Load";
-import Adduser from "./components/Add/adduser.component";
+import Adduser from "./components/Students/adduser.component";
 import Student from "./views/Student";
 
 function App() {
