@@ -54,7 +54,7 @@ class ElevesModel
 
     public function Inscire_Eleve($data)
     {
-        $sql = "INSERT INTO Eleves (Nom, Prenom, Classe,Ecole_annuel, Ville_naiss,  Tel, Sexe)
+        $sql = "INSERT INTO eleves (Nom, Prenom, Classe,Ecole_annuel, Ville_naiss,  Tel, Sexe)
                     VALUES (:Nom, :Prenom, :Classe, :Ecole_annuel, :Ville_naiss,  :Tel, :Sexe)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':Nom', $data['Nom']);
@@ -73,7 +73,7 @@ class ElevesModel
 
     public function ListeEleve()
     {
-        $sql = "SELECT * FROM Eleves";
+        $sql = "SELECT * FROM eleves";
         $stmt = $this->conn->query($sql);
         if ($stmt->execute()) {
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -83,16 +83,26 @@ class ElevesModel
 
     public function RemoveByMatricule($matricule)
     {
-        $sql = "DELETE FROM Eleves WHERE Matricule = :Matricule";
+        $sql = "DELETE FROM eleves WHERE Matricule = :Matricule";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id', $matricule, PDO::PARAM_INT);
+        $stmt->bindParam(':Matricule', $matricule, PDO::PARAM_INT);
         return $stmt->execute();
+    }
+    public function Get_WithMatricule($matricule)
+    {
+        $sql = "SELECT * FROM eleves WHERE Matricule = :Matricule";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':Matricule', $matricule, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
     }
     public function Modify_ByMatricule($data, $matricule)
     {
-        $sql = "UPDATE Users
+        $sql = "UPDATE eleves
             SET Nom = :Nom, Prenom = :Prenom, Classe = :Classe,Ecole_annuel = :Ecole_annuel, Ville_naiss = :Ville_naiss,  Tel = :Tel, Sexe = :Sexe
-            WHERE Id_user = :id";
+            WHERE Matricule = :Matricule";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':Nom', $data['Nom']);
         $stmt->bindParam(':Prenom', $data['Prenom']);

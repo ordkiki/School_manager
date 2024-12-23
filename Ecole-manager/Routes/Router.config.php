@@ -34,6 +34,8 @@ $routes = [
     'POST /eleves/Add' => ['ElevesController', 'Create'],
     'PUT /eleves/Edit/{Matricule}' => ['ElevesController', 'Put'],
     'DELETE /eleves/Remove/{id}' => ['ElevesController', 'Delete_user'],
+    'Put /Students/Edit/{Matricule}' => ['ElevesController', 'Put'],
+    'GET /Students/{Matricule}' => ['ElevesController', 'Get_ElevesByMatricule'],
 ];
 
     try {

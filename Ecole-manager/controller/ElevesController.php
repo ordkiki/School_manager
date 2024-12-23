@@ -32,13 +32,18 @@ class ElevesController
 
     public function Get_User()
     {
-        $Users = $this->ElevesModel->ListeEleve();
-        echo json_encode($Users);
+        $eleves = $this->ElevesModel->ListeEleve();
+        echo json_encode($eleves);
+    }
+    public function Get_ElevesByMatricule($Matricule)
+    {
+        $eleves = $this->ElevesModel->Get_WithMatricule($Matricule);
+        echo json_encode($eleves);
     }
     public function Delete_user($Matricule)
     {
-        $Users = $this->ElevesModel->RemoveByMatricule($Matricule);
-        echo json_encode($Users);
+        $eleves = $this->ElevesModel->RemoveByMatricule($Matricule);
+        echo json_encode($eleves);
     }
     public function Put($Matricule)
     {
