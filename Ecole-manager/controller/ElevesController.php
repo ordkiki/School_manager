@@ -32,15 +32,20 @@ class ElevesController
 
     public function Get_User()
     {
-        $Users = $this->ElevesModel->ListeEleve();
-        echo json_encode($Users);
+        $eleves = $this->ElevesModel->ListeEleve();
+        echo json_encode($eleves);
     }
-    public function Delete_user($id)
+    public function Get_ElevesByMatricule($Matricule)
     {
-        $Users = $this->ElevesModel->Remove_User_ById($id);
-        echo json_encode($Users);
+        $eleves = $this->ElevesModel->Get_WithMatricule($Matricule);
+        echo json_encode($eleves);
     }
-    public function Put($id)
+    public function Delete_user($Matricule)
+    {
+        $eleves = $this->ElevesModel->RemoveByMatricule($Matricule);
+        echo json_encode($eleves);
+    }
+    public function Put($Matricule)
     {
         $data = json_decode(file_get_contents("php://input"), true);
         if (!isset($data['Nom'], $data['Prenom'], $data['Email'], $data['Telephone'])) {
@@ -50,7 +55,7 @@ class ElevesController
         }
 
 
-        if ($this->ElevesModel->Modify_userById($data, $id)) {
+        if ($this->ElevesModel->Modify_ByMatricule($data, $Matricule)) {
             echo json_encode([
                 "Nom"     => $data['Nom'],
                 "success" => true,

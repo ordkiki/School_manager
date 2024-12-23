@@ -1,6 +1,5 @@
 <?php
 
-
 function matchRoute($url, $route)
 {
     $pattern = "@^" . preg_replace('/\{[\w]+\}/', '([\w-]+)', $route) . "$@";
@@ -31,10 +30,12 @@ $routes = [
 
     // Routes pour ElevesController
     'GET /eleves' => ['ElevesController', 'Get_User'],
-    // 'GET /elevs' => ['ElevesController', 'Get_User'],
-    'POST /eleves' => ['ElevesController', 'Create'],
-    'PUT /eleves/{id}' => ['ElevesController', 'Put'],
-    'DELETE /eleves/{id}' => ['ElevesController', 'Delete_user'],
+    // 'GET /eleves' => ['ElevesController', 'Get_User'],
+    'POST /eleves/Add' => ['ElevesController', 'Create'],
+    'PUT /eleves/Edit/{Matricule}' => ['ElevesController', 'Put'],
+    'DELETE /eleves/Remove/{id}' => ['ElevesController', 'Delete_user'],
+    'Put /Students/Edit/{Matricule}' => ['ElevesController', 'Put'],
+    'GET /Students/{Matricule}' => ['ElevesController', 'Get_ElevesByMatricule'],
 ];
 
     try {

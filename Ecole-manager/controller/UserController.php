@@ -11,6 +11,7 @@ class UserController
     public function __construct()
     {
         $database = new Database;
+        
         $db = $database->GetConnection();
         $this->UserModel = new UserModel($db);
     }
@@ -101,5 +102,6 @@ class UserController
         } else {
             echo json_encode(["loggedIn" => false]);
         }
+        
     }
 }
