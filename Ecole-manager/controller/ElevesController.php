@@ -22,7 +22,7 @@ class ElevesController
             echo json_encode(["message" => "Données JSON invalides"]);
             return;
         }
-
+        $data['Nom'] = strtoupper($data['Nom']);
         if ($this->ElevesModel->Inscire_Eleve($data)) {
             echo json_encode(["message" => "Création réussie"]);
         } else {
@@ -48,7 +48,7 @@ class ElevesController
     public function Put($Matricule)
     {
         $data = json_decode(file_get_contents("php://input"), true);
-        if (!isset($data['Nom'], $data['Prenom'], $data['Email'], $data['Telephone'])) {
+        if (!isset($data['Nom'], $data['Prenom'], $data['Tel'])) {
             echo json_encode(["message" => "Données invalides ou incomplètes."]);
             http_response_code(400);
             return;

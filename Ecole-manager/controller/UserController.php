@@ -1,8 +1,14 @@
 <?php
 require_once __DIR__ . '/../model/UserModel.php';
 require_once __DIR__ . '/../config/Database.php';
+require_once __DIR__ . '/../error/validation.err.php';
 
+use ErrorLog;
 use Config\Database;
+
+use function ErrorLog\validate_mdp;
+use function ErrorLog\validatePassword;
+use function ErrorLog\verify_mdp;
 
 class UserController
 {
@@ -21,6 +27,12 @@ class UserController
         $data = json_decode(file_get_contents("php://input"), true);
         if (!$data || !isset($data['Email'], $data['Mdp'])) {
             echo json_encode(["message" => "Données JSON invalides ou incomplètes"]);
+            http_response_code(400);
+            return;
+        }
+
+        if (!validatePassword( $data['Mdp'])) {
+            echo json_encode(["message" => "La longueur de la mot de passe doit comporter de majuscule, une chiffre minimum et longueur>8"]);
             http_response_code(400);
             return;
         }

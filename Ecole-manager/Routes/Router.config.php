@@ -22,20 +22,20 @@ $url = str_replace($baseUrl, '', $url);
 $routes = [
         
     // Routes pour User Controller
-    'POST /users/Log' => ['UserController', 'Login'],
     'GET /users/Dashboard' => ['UserController', 'CheckSession'],
+    'POST /users/Log' => ['UserController', 'Login'],
+    'POST /users/LogOut' => ['UserController', 'CloseSession'],
     'POST /users' => ['UserController', 'Signin'],
     'PUT /users/{id}' => ['UserController', 'Put'],
     'DELETE /users/{id}' => ['UserController', 'Delete_user'],
 
     // Routes pour ElevesController
+
     'GET /eleves' => ['ElevesController', 'Get_User'],
-    // 'GET /eleves' => ['ElevesController', 'Get_User'],
-    'POST /eleves/Add' => ['ElevesController', 'Create'],
-    'PUT /eleves/Edit/{Matricule}' => ['ElevesController', 'Put'],
-    'DELETE /eleves/Remove/{id}' => ['ElevesController', 'Delete_user'],
-    'Put /Students/Edit/{Matricule}' => ['ElevesController', 'Put'],
     'GET /Students/{Matricule}' => ['ElevesController', 'Get_ElevesByMatricule'],
+    'POST /eleves/Add' => ['ElevesController', 'Create'],
+    'PUT /Students/Edit/{Matricule}' => ['ElevesController', 'Put'],
+    'DELETE /Students/Remove/{Matricule}' => ['ElevesController', 'Delete_user'],
 ];
 
     try {
