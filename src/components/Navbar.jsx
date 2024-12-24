@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { CiSettings } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
 
 // import { useNavigate } from "react-router-dom";
 
@@ -8,10 +9,16 @@ function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [useremail, setemail] = useState([]);
   const [logo,setLogo] = useState([]);
+  const Navigate = useNavigate();
  // Utilisation de charAt pour obtenir le premier caractère
   const LogOut = () => {
     try {
-      axios.post("http://localhost/API/Ecole-manager/users/LogOut");
+      if (confirm("Voulez-vous vraiment deconnecter ?")) 
+        {
+              axios.post("http://localhost/API/Ecole-manager/users/LogOut");
+              Navigate("/Login");
+            }
+            return;
     }
     catch (exception){
       console.log(exception);
@@ -28,6 +35,8 @@ function Navbar() {
 
         setIsLoggedIn(true);
         setemail(response.data.email)
+        console.log(response.data);
+        
         setLogo(response.data.email.charAt(0));
         // logo.capitalize()
         
